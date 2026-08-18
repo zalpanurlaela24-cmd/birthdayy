@@ -1,0 +1,746 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Membuat website responsive di HP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Judul yang muncul di tab browser -->
+    <title>A Little Birthday Surprise 🎂</title>
+
+    <style>
+        /* =========================================================
+           RESET
+           Menghilangkan margin dan padding bawaan browser
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================================
+           BODY
+        ========================================================= */
+
+        body {
+            min-height: 100vh;
+            font-family: "Georgia", serif;
+            background: linear-gradient(
+                135deg,
+                #fff7f8,
+                #fceef3,
+                #f8e8ee
+            );
+            color: #4b3840;
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================================
+           PAGE / SECTION
+        ========================================================= */
+
+        .page {
+            min-height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        /* Halaman pertama ditampilkan */
+        .page.active {
+            display: flex;
+        }
+
+
+        /* =========================================================
+           OPENING PAGE
+        ========================================================= */
+
+        .opening-content {
+            max-width: 600px;
+            animation: fadeUp 1.2s ease;
+        }
+
+        .small-text {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #9d7584;
+            margin-bottom: 20px;
+        }
+
+        .opening-title {
+            font-size: clamp(42px, 10vw, 75px);
+            font-weight: normal;
+            margin-bottom: 20px;
+            color: #634651;
+        }
+
+        .opening-subtitle {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #816a72;
+            margin-bottom: 35px;
+        }
+
+
+        /* =========================================================
+           BUTTON
+        ========================================================= */
+
+        .btn {
+            border: none;
+            background: #8f6373;
+            color: white;
+            padding: 15px 28px;
+            border-radius: 50px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 10px 25px rgba(100, 60, 75, 0.15);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: #76505f;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+
+        /* =========================================================
+           MAIN BIRTHDAY PAGE
+        ========================================================= */
+
+        .birthday-content {
+            width: 100%;
+            max-width: 850px;
+            animation: fadeUp 1s ease;
+        }
+
+        .birthday-title {
+            font-size: clamp(42px, 9vw, 72px);
+            font-weight: normal;
+            color: #634651;
+            margin-bottom: 10px;
+        }
+
+        .name {
+            color: #a15d78;
+        }
+
+        .age {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            color: #8b7079;
+            margin-bottom: 30px;
+        }
+
+        .message-card {
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(150, 100, 120, 0.15);
+            border-radius: 25px;
+            padding: 30px;
+            max-width: 650px;
+            margin: auto;
+            box-shadow: 0 15px 40px rgba(100, 60, 75, 0.08);
+        }
+
+        .message-card p {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            line-height: 1.9;
+            color: #6f5961;
+        }
+
+
+        /* =========================================================
+           DECORATION
+        ========================================================= */
+
+        .flower {
+            position: fixed;
+            font-size: 25px;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        .flower.one {
+            top: 10%;
+            left: 8%;
+        }
+
+        .flower.two {
+            top: 25%;
+            right: 8%;
+            animation-delay: 1s;
+        }
+
+        .flower.three {
+            bottom: 15%;
+            left: 12%;
+            animation-delay: 2s;
+        }
+
+        .flower.four {
+            bottom: 10%;
+            right: 12%;
+            animation-delay: 3s;
+        }
+
+
+        /* =========================================================
+           PHOTO GALLERY
+        ========================================================= */
+
+        .gallery-title {
+            margin-top: 45px;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: normal;
+            color: #634651;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .photo {
+            height: 180px;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #ead9df;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: 0.4s ease;
+        }
+
+        .photo img:hover {
+            transform: scale(1.06);
+        }
+
+
+        /* =========================================================
+           SURPRISE PAGE
+        ========================================================= */
+
+        .surprise-content {
+            max-width: 650px;
+            animation: fadeUp 1s ease;
+        }
+
+        .envelope {
+            font-size: 70px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        .surprise-title {
+            font-size: clamp(38px, 8vw, 60px);
+            font-weight: normal;
+            color: #634651;
+            margin-bottom: 25px;
+        }
+
+        .final-message {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 25px;
+            line-height: 1.9;
+            font-family: Arial, sans-serif;
+            color: #6f5961;
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================================================
+           CONFETTI
+        ========================================================= */
+
+        .confetti {
+            position: fixed;
+            top: -20px;
+            width: 8px;
+            height: 15px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fall 3s linear forwards;
+        }
+
+
+        /* =========================================================
+           ANIMATIONS
+        ========================================================= */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+
+        /* =========================================================
+           RESPONSIVE DESIGN
+           Tampilan khusus layar HP kecil
+        ========================================================= */
+
+        @media (max-width: 600px) {
+
+            .page {
+                padding: 25px 18px;
+            }
+
+            .message-card {
+                padding: 25px 20px;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .photo {
+                height: 150px;
+            }
+
+            
+            
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         DECORATIVE FLOWERS
+         Hanya sebagai hiasan background
+    ========================================================= -->
+
+    <div class="flower one">🌷</div>
+    <div class="flower two">✿</div>
+    <div class="flower three">🌸</div>
+    <div class="flower four">♡</div>
+
+
+    <!-- =========================================================
+         PAGE 1 — OPENING
+    ========================================================= -->
+
+    <section id="openingPage" class="page active">
+
+        <div class="opening-content">
+
+            <!-- Text kecil di atas -->
+            <p class="small-text">
+               tanda cintaku padamu cihuy
+            </p>
+
+            <!-- Judul utama -->
+            <h1 class="opening-title">
+                ACIKIWIR ULTAH MPRUY
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="opening-subtitle">
+                enieh adalah bukti betapa besar nya may cintah gwah untuck mu bupp
+                <br>
+                Bersiaplah
+            </p>
+
+            <!-- Tombol membuka website -->
+            <button class="btn" onclick="openBirthday()">
+                Bismilah chan
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         PAGE 2 — BIRTHDAY MESSAGE
+    ========================================================= -->
+
+    <section id="birthdayPage" class="page">
+
+        <div class="birthday-content">
+
+            <!-- Judul ulang tahun -->
+            <h1 class="birthday-title">
+                Happy birthday pookiemay
+                <span class="name">may bubup gwah</span>
+            </h1>
+
+            <!-- 19 -->
+            <p class="age">
+                ✦ selamat menginjak dewasa bupp ✦
+            </p>
+
+
+            <!-- Kartu ucapan -->
+            <div class="message-card">
+
+                <p>
+                    Congrats Repeat Year! 🎂
+                    <br><br>
+
+                    e e sakedung kading padungding dung padungking 
+                  si kecyil mungil sudah level 19. Aku cuman ada satu do'a bup,
+                  yep kamu lah sosok dari "do'a" itu #Wanita Luas Wawasan
+                    <br><br>
+
+                    sehat selalu ya bup, gera sukses, mun sukses bejaan, hayang loker awokawok
+                    semoga we engke katarima di gsi teh langsung jadi pemilik saham. Ah eta lah pokonamah
+                    sok ngado'a we sing seueur, di amin ken didie. Btw ini aku bikin sendiri bup,
+                    hanya untuk mu ku mengoding lagieh, tak pernah terlintas di benak ini untuk mengoding lagieh,
+                    tapi jika untuk mu, ku lakukan apa pun ituh, sori ya bup telat, ai na dongo jdi aqu 
+                    hanya bermodal buku bekas esemkah lop yu♡
+                    <br><br>
+
+                    I hope this year brings you
+                    more happiness, more memories,
+                    and lots of beautiful moments.
+                  (biar estetik sedikit)
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 GALLERY
+            ================================================== -->
+
+            <h2 class="gallery-title">
+                Aduhay si cantiq bikin besyek
+            </h2>
+
+            <div class="gallery">
+
+                <div class="photo">
+                    <img
+                        src="1.jpg"
+                        alt="Memory 1">
+                </div>
+
+                <div class="photo">
+                    <img
+                        src="2.jpg"
+                        alt="Memory 2">
+                </div>
+
+                <div class="photo">
+                    <img
+                        src="3.jpg"
+                        alt="Memory 3">
+                </div>
+              
+              <div class="photo">
+                    <img
+                        src="4.jpg"
+                        alt="Memory 3">
+              </div>
+
+              <div class="photo">
+                    <img
+                        src="5.jpg"
+                        alt="Memory 3">
+              </div>
+
+              <div class="photo">
+                    <img
+                        src="6.jpg"
+                        alt="Memory 3">
+              </div>
+
+              <div class="photo">
+                    <img
+                        src="7.jpg"
+                        alt="Memory 3">
+              </div>
+
+              <div class="photo">
+                    <img
+                        src="8.jpg"
+                        alt="Memory 3">
+              </div>
+
+              <div class="photo">
+                    <img
+                        src="9.jpg"
+                        alt="Memory 3">
+              </div>
+
+              <div class="photo">
+                    <img
+                        src="10.jpg"
+                        alt="Memory 3">
+              </div>
+
+              <div class="photo">
+                    <img
+                        src="11.jpg"
+                        alt="Memory 3">
+              </div>
+
+              <div class="photo">
+                    <img
+                        src="12.jpg"
+                        alt="Memory 3">
+              </div>
+
+            </div>
+
+
+            <!-- Tombol menuju surprise terakhir -->
+            <button class="btn" onclick="showSurprise()">
+                Surat Cinta 💌
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         PAGE 3 — FINAL SURPRISE
+    ========================================================= -->
+
+    <section id="surprisePage" class="page">
+
+        <div class="surprise-content">
+
+            <!-- Icon amplop -->
+            <div class="envelope">
+                💌
+            </div>
+
+            <!-- Judul -->
+            <h1 class="surprise-title">
+                Surat Cinta untuk Starla? NO
+              
+            </h1>
+          <h2 class="surprise-title"> Surat Cinta untuk may bubup? YES</h2>
+
+            <!-- Pesan terakhir -->
+            <div class="final-message">
+
+                i don't say i love you, but...
+
+                <br><br>
+
+                KONSONAN LANGIT YANG AKAN MENJADI SEBUAH TAKDIR CINTA KITA
+
+                <br><br>
+
+                MENJADIKAN HAMPARAN BAHWA SAKSI INI, DETIK INI
+                <br><br>
+
+                SECARA SINARAN ULTRAFENG YANG MULAI DINAUNGI OLEH GREENDAY
+                <br><br>
+
+                AKAN MENJADI CRANBERRYS CINTA KITA MENJADI NYATAAAAA
+            </div>
+
+            <!-- Tombol kembali -->
+            <button class="btn" onclick="goBack()">
+               mo liat lagieh? 
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         Mengatur perpindahan halaman dan confetti
+    ========================================================= -->
+
+    <script>
+
+        /* =====================================================
+           FUNCTION: changePage
+           Digunakan untuk mengganti halaman website
+        ===================================================== */
+
+        function changePage(pageToShow) {
+
+            // Mengambil semua section yang memiliki class "page"
+            const pages = document.querySelectorAll(".page");
+
+            // Menghapus class active dari semua halaman
+            pages.forEach(function(page) {
+                page.classList.remove("active");
+            });
+
+            // Menampilkan halaman yang dipilih
+            document.getElementById(pageToShow).classList.add("active");
+
+            // Scroll kembali ke bagian paling atas
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+
+        /* =====================================================
+           FUNCTION: openBirthday
+           Dipanggil ketika tombol opening diklik
+        ===================================================== */
+
+        function openBirthday() {
+
+            // Pindah ke halaman ulang tahun
+            changePage("birthdayPage");
+
+            // Jalankan efek confetti
+            createConfetti();
+        }
+
+
+        /* =====================================================
+           FUNCTION: showSurprise
+           Membuka halaman surprise terakhir
+        ===================================================== */
+
+        function showSurprise() {
+
+            // Pindah ke halaman surprise
+            changePage("surprisePage");
+
+            // Confetti lagi untuk surprise terakhir
+            createConfetti();
+        }
+
+
+        /* =====================================================
+           FUNCTION: goBack
+           Kembali ke halaman pertama
+        ===================================================== */
+
+        function goBack() {
+
+            // Kembali ke opening page
+            changePage("openingPage");
+        }
+
+
+        /* =====================================================
+           FUNCTION: createConfetti
+           Membuat confetti secara otomatis
+        ===================================================== */
+
+        function createConfetti() {
+
+            // Jumlah confetti
+            const amount = 80;
+
+            // Membuat confetti sebanyak amount
+            for (let i = 0; i < amount; i++) {
+
+                // Membuat elemen div baru
+                const piece = document.createElement("div");
+
+                // Memberikan class confetti
+                piece.classList.add("confetti");
+
+                // Posisi horizontal random
+                piece.style.left = Math.random() * 100 + "vw";
+
+                // Ukuran random
+                const size = Math.random() * 6 + 5;
+
+                piece.style.width = size + "px";
+                piece.style.height = size * 1.5 + "px";
+
+                // Warna random
+                const colors = [
+                    "#d79aaa",
+                    "#b98295",
+                    "#e8b7c5",
+                    "#c89aaa",
+                    "#f0cbd5"
+                ];
+
+                piece.style.backgroundColor =
+                    colors[Math.floor(Math.random() * colors.length)];
+
+                // Durasi animasi random
+                piece.style.animationDuration =
+                    Math.random() * 2 + 2 + "s";
+
+                // Menambahkan confetti ke body
+                document.body.appendChild(piece);
+
+                // Menghapus confetti setelah animasi selesai
+                setTimeout(function() {
+                    piece.remove();
+                }, 4500);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
